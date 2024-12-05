@@ -34,13 +34,15 @@ export default function (props: StepProps) {
                 break;
         }
 
-        setShip(
-            <img
-                src={ShipImage}
-                alt="Ship"
-                style={{ transform: `rotate(${rotation}deg)` }}
-            />
-        );
+        if (props.orientation) {
+            setShip(
+                <img
+                    src={ShipImage}
+                    alt="Ship"
+                    style={{ transform: `rotate(${rotation}deg)` }}
+                />
+            );
+        }
     }, [])
 
     return (
