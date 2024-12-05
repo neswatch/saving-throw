@@ -1,0 +1,26 @@
+services:
+  build-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./output:/output
+    command: ["sh", "-c", "npm run build && cp -r /app/dist/* /output"]
+
+  web:
+    image: nginx:latest
+
+    depends_on:
+      - build-web
+    
+    networks:
+      - reverse-proxy_proxy-net
+
+    volumes:
+      - ./output:/usr/share/nginx/html
+      - ../nginx.conf:/etc/nginx/nginx.conf
+
+
+networks:
+  reverse-proxy_proxy-net:
+    external: true
