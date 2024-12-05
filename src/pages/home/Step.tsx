@@ -1,5 +1,8 @@
 import {Button} from "primereact/button";
 import "../../assets/css/home/step.css"
+import {useEffect, useState} from "react";
+import {JSX} from "react";
+import ShipImage from "../../assets/img/home/feu1-images-pixel.png"
 
 interface StepProps {
     orientation: "UP" | "DOWN" | "LEFT" | "RIGHT" | "HIDDEN";
@@ -11,10 +14,40 @@ interface StepProps {
 
 export default function (props: StepProps) {
 
-    // TODO: Implement the Step component
+    const [ship, setShip] = useState<JSX.Element>(<></>)
+
+    useEffect(() => {
+        let rotation: number;
+        switch (props.orientation) {
+            case "UP":
+                rotation = -90;
+                break;
+            case "DOWN":
+                rotation = 90;
+                break;
+            case "LEFT":
+                rotation = 180;
+                break;
+            case "RIGHT":
+            default:
+                rotation = 0;
+                break;
+        }
+
+        if (props.orientation) {
+            setShip(
+                <img
+                    src={ShipImage}
+                    alt="Ship"
+                    style={{ transform: `rotate(${rotation}deg)` }}
+                />
+            );
+        }
+    }, [])
 
     return (
         <article id={props.id} className={`${props.className} step`}>
+            {ship}
             <Button label={props.children} severity={props.severity} />
         </article>
     )
