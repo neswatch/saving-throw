@@ -12,7 +12,7 @@ function Home() {
         <div className={"home"} style={{backgroundImage: `url(${OceanBg})`}}>
             <div style={{backgroundImage: `url(${WizardImg}`}}>
                 <Step orientation={"UP"} severity={"danger"} id={"heart-button"}>Coeur</Step>
-                <Step orientation={"DOWN"} severity={"info"} id={"lungs-button"}>Poumons</Step>
+                <Step orientation={"DOWN"} severity={"info"} id={"lungs-button"} onClick={()=>navigate("/poumon")}>Poumons</Step>
                 <Step orientation={"LEFT"} severity={"success"} id={"temperature-button"} onClick={() => navigate("/temperature")} >Température</Step>
             </div>
         </div>

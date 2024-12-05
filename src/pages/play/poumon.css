@@ -1,0 +1,10 @@
+div.poumon {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
