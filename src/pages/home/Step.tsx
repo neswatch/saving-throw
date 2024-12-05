@@ -46,7 +46,7 @@ export default function (props: StepProps) {
     }, [])
 
     return (
-        <article id={props.id} className={`${props.className} step`}>
+        <article id={props.id} className={`${props.className||""} step`}>
             {ship}
             <Button label={props.children} severity={props.severity} />
         </article>
