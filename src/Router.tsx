@@ -1,11 +1,17 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Count from "./pages/count/Count.tsx";
+import Home from "./pages/home/Home.tsx";
+import {useEffect} from "react";
 
 export default function Router() {
+
+    useEffect(() => {
+        document.title = "Saving throw"
+    }, [])
+
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={"/"} element={<Count/>} />
+                <Route path={"/"} element={<Home/>} />
             </Routes>
         </BrowserRouter>
     )

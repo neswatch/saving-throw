@@ -1,0 +1,36 @@
+div.home {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+div.home div:first-child {
+    width: 90%;
+    height: 90%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: grid;
+    grid-template:
+            ". head ." 1fr
+            "lungs . heart" 1fr
+            ". . ." 1fr
+            ". . ." 1fr;
+}
+
+div.home div:first-child #lungs-button {
+    grid-area: lungs;
+}
+
+div.home div:first-child #heart-button {
+    grid-area: heart;
+}
+
+div.home div:first-child #temperature-button {
+    grid-area: head;
+}
