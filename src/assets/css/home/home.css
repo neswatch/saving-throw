@@ -1,36 +1,79 @@
 div.home {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 1;
 }
 
 div.home div:first-child {
-    width: 90%;
-    height: 90%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: grid;
-    grid-template:
-            ". head ." 1fr
-            "lungs . heart" 1fr
-            ". . ." 1fr
-            ". . ." 1fr;
+  width: 90%;
+  height: 90%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: grid;
+  grid-template:
+    ". head ." 1fr
+    "lungs . heart" 1fr
+    ". . ." 1fr
+    ". . ." 1fr;
 }
 
 div.home div:first-child #lungs-button {
-    grid-area: lungs;
+  grid-area: lungs;
 }
 
 div.home div:first-child #heart-button {
-    grid-area: heart;
+  grid-area: heart;
 }
 
 div.home div:first-child #temperature-button {
-    grid-area: head;
+  grid-area: head;
+}
+
+.light-particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  border-radius: 50%;
+  animation: floatUp 1s ease-out;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.light-ball {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 200, 50, 0.5) 70%
+  );
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 10s ease-out, opacity 5s ease-in;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 1; /* Starts fully visible */
 }
