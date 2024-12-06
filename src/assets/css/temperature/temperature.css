@@ -1,16 +1,26 @@
 div.temperature {
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100vh; /* Ensure the div takes the full viewport height */
-    flex-direction: column;
-
+    justify-content: center;
+    align-items: center;
     background-size: cover;
     background-repeat: no-repeat;
     z-index: 1;
 }
 
-div.temperature button {
-    min-height: 4vh;
-    min-width: 10vw
+div.temperature :first-child {
+    padding: 1vh;
+    max-width: 70vw;
+}
+
+div.temperature article.question {
+    display: flex;
+    flex-direction: column;
+}
+
+div.temperature article.question section {
+    display: flex;
+    gap: 2vw;
+    align-items: center;
 }
