@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Minijeu from "./pages/count/Minijeu/Minijeu.tsx";
 import Temperature from "./pages/temperature/Temperature.tsx";
 import Poumon from "./pages/play/poumon.tsx";
+import About from "./pages/about/About.tsx";
 
 export default function Router() {
   useEffect(() => {
@@ -16,6 +17,7 @@ export default function Router() {
         <Route path={"/mj"} element={<Minijeu />} />
         <Route path={"/temperature"} element={<Temperature />} />
         <Route path={"/poumon"} element={<Poumon />} />
+        <Route path={"/about"} element={<About />} />
       </Routes>
     </BrowserRouter>
   );
