@@ -77,3 +77,22 @@ div.home div:first-child #temperature-button {
   z-index: 1000;
   opacity: 1; /* Starts fully visible */
 }
+
+div.lLogo3 img{
+  position: absolute;
+  animation: logoAnim3 2s ease-out;
+  top: 3em;
+  left: 5em;
+  transform:  scale(3);
+}
+
+@keyframes logoAnim3 {
+  0% {
+    transform: rotateX(1000deg) scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0deg) scale(3);
+    opacity: 1;
+  }
+}
