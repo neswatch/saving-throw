@@ -25,9 +25,9 @@ function rand(): number {
   return Math.floor(Math.random() * 4);
 }
 
-// Composant pour une case individuelle
 const Case: React.FC<CaseProps> = ({
   image,
+  // @ts-ignore
   correctValue,
   currentValue,
   onRotate,
