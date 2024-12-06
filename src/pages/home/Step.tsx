@@ -11,6 +11,7 @@ interface StepProps {
     id?: string
     className?: string
     onClick?: () => void
+    onShipClick?: ()=>void
     disabled?:boolean
 }
 
@@ -39,6 +40,7 @@ export default function (props: StepProps) {
         if (props.orientation && props.orientation!="HIDDEN") {
             setShip(
                 <img
+                    onClick={props.onShipClick}
                     src={ShipImage}
                     alt="Ship"
                     style={{ transform: `rotate(${rotation}deg)` }}
