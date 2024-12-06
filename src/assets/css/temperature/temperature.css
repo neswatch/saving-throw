@@ -4,4 +4,13 @@ div.temperature {
     align-items: center; /* Center vertically */
     height: 100vh; /* Ensure the div takes the full viewport height */
     flex-direction: column;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+div.temperature button {
+    min-height: 4vh;
+    min-width: 10vw
 }
