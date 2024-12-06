@@ -4,7 +4,9 @@ import {useEffect, useState} from "react";
 import "./poumon.css"
 
 import OceanBg from "../../assets/img/home/Preview_143.png"
+import logo from "../../assets/logo/logo-lyreco.png"
 import {useNavigate} from "react-router-dom";
+import {ProgressBar} from "primereact/progressbar";
 
 export default function Poumon() {
 
@@ -20,9 +22,12 @@ export default function Poumon() {
         [0,0,0]
     ])
     const [vaiseauPos, setVaiseauPos] = useState(0);
+    const [win, setWin] = useState(false);
 
     const [lastEmpty, setLastEmpty] = useState(0);
     const [loos, setLoos] = useState(false);
+
+    const [progression, setProgression] = useState(0);
 
     const navigate = useNavigate();
 
@@ -35,7 +40,12 @@ export default function Poumon() {
         const newValue = oldGrille.slice(1);
         if (oldGrille[0][vaiseauPos]>0){
             setLoos(true)
+            setProgression(0);
             return oldGrille
+        }
+        setProgression(v=>v+1);
+        if (progression>100){
+            iswin()
         }
         if (
             (newValue[5][0]>0 && (newValue[6][1]>0 && newValue[6][2]>0))
@@ -87,6 +97,10 @@ export default function Poumon() {
         </tr>
     }
 
+    function iswin(){
+        localStorage.setItem("poumon","1");
+        setWin(true)
+    }
 
     useEffect(() => {
         const interval = setInterval(
@@ -112,7 +126,12 @@ export default function Poumon() {
 
     return (
         <div className="poumon" style={{backgroundImage: `url(${OceanBg})`}}>
-
+            <h1>
+                Sauver les plantons !! Le poumons des océans
+            </h1>
+            <p>
+                Un petit planton a enbarqué dans notre vaisseau nous devons le rammener à sa famille, évité la pollution, et la pêche pour la rejoindre.
+            </p>
             <div className="card" >
                 <table className={"table-collapse"}>
                     {getRaw(grille[7])}
@@ -135,16 +154,20 @@ export default function Poumon() {
 
                     </tr>
                 </table>
-
-                <div style={{"display": "flex"}}>
+                <ProgressBar  value={progression} showValue={false}/>
+                {progression>150? <img height={50} src={logo} />: ""}
+                <div className={"f-center"}>
                     <button className={"xlarge"} onClick={() => makeMove(-1)} disabled={vaiseauPos == 0 || (grille[0][vaiseauPos] > 0)}>◀️
                     </button>
                     <button className={"xlarge"} onClick={() => restart()} disabled={!loos}>🔄️</button>
                     <button className={"xlarge"} onClick={() => makeMove(1)} disabled={vaiseauPos == 2 || (grille[0][vaiseauPos] > 0)}>▶️
                     </button>
                 </div>
-                {loos? <p>Perdu !!</p>: <p>Survie le plus longtemps</p>}
-                <button onClick={()=>navigate("/")}>↩️Go Home</button>
+                {loos? win? <p> Tu as sauvé le planton !! </p>  : <p>Perdu !!</p> : (progression>100)? <p> C'est bon ton defit est validé ! </p> : <p>Survie le plus longtemps</p>}
+                <div className={"btnNav"}>
+                    <button onClick={() => navigate("/")}>↩️ Go Home</button>
+                    {win ? <button onClick={() => navigate("/mj")}>Next ➡️</button> : ""}
+                </div>
             </div>
         </div>
     )
