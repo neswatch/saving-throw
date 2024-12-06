@@ -11,6 +11,7 @@ interface StepProps {
     id?: string
     className?: string
     onClick?: () => void
+    disabled?:boolean
 }
 
 export default function (props: StepProps) {
@@ -35,7 +36,7 @@ export default function (props: StepProps) {
                 break;
         }
 
-        if (props.orientation) {
+        if (props.orientation && props.orientation!="HIDDEN") {
             setShip(
                 <img
                     src={ShipImage}
@@ -49,7 +50,7 @@ export default function (props: StepProps) {
     return (
         <article id={props.id} className={`${props.className||""} step`}>
             {ship}
-            <Button label={props.children} severity={props.severity} onClick={props.onClick} />
+            <Button label={props.children} severity={props.severity} onClick={props.onClick} disabled={props.disabled}/>
         </article>
     )
 }

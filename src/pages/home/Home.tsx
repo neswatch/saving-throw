@@ -7,35 +7,50 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
 
+  const finishHearth = localStorage.getItem("heart");
+  const finishPoumon = localStorage.getItem("poumon");
+  const finishTemp = localStorage.getItem("temp");
+
   return (
-    <div className={"home"} style={{ backgroundImage: `url(${OceanBg})` }}>
-      <div style={{ backgroundImage: `url(${WizardImg}` }}>
-        <Step
-          orientation={"UP"}
-          severity={"danger"}
-          id={"heart-button"}
-          onClick={() => navigate("/mj")}
-        >
-          Coeur
-        </Step>
-        <Step
-          orientation={"DOWN"}
-          severity={"info"}
-          id={"lungs-button"}
-          onClick={() => navigate("/poumon")}
-        >
-          Poumons
-        </Step>
-        <Step
-          orientation={"LEFT"}
-          severity={"success"}
-          id={"temperature-button"}
-          onClick={() => navigate("/temperature")}
-        >
-          Température
-        </Step>
+      <div className={"home"} style={{backgroundImage: `url(${OceanBg})`}}>
+        <div style={{backgroundImage: `url(${WizardImg}`}}>
+          <Step
+              orientation={(finishPoumon=="1" && !(finishHearth=="1"))?"UP":"HIDDEN"}
+              severity={"danger"}
+              id={"heart-button"}
+              onClick={() => navigate("/mj")}
+              disabled={finishPoumon==null}
+          >
+            Coeur
+          </Step>
+          <Step
+              orientation={(finishTemp=="1" && finishPoumon==null)?"DOWN":"HIDDEN"}
+              severity={"info"}
+              id={"lungs-button"}
+              onClick={() => navigate("/poumon")}
+              disabled={finishTemp==null}
+          >
+            Poumons
+          </Step>
+          <Step
+              orientation={(finishTemp==null)?"LEFT":"HIDDEN"}
+              severity={"success"}
+              id={"temperature-button"}
+              onClick={() => navigate("/temperature")}
+          >
+            Température
+          </Step>
+            {
+                (finishHearth=="1")?
+                    <Step orientation={"RIGHT"} severity={"success"}  >
+                        Le voyage continue !!
+                    </Step>
+                    :
+                    ""
+            }
+
+        </div>
       </div>
-    </div>
   );
 }
 

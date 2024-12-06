@@ -5,10 +5,12 @@ import {useEffect, useRef, useState} from "react";
 import {QuizData} from "../../shared/model/QuizData.ts";
 import {QuizService} from "../../shared/service/QuizService.ts";
 import {Messages} from "primereact/messages";
+import {useNavigate} from "react-router-dom";
 
 export default function () {
 
     const msg = useRef(null);
+    const navigate = useNavigate();
 
     const [quizData, setQuizData] = useState<Array<QuizData>>(QuizService.getAll())
     const [selectedResponse, setSelectedResponse] = useState<string>("")
@@ -25,6 +27,7 @@ export default function () {
                 msg.current.clear()
                 const correctResponse = response.reponses.find(rep => rep.correcte)
                 if (correctResponse && correctResponse.contenu === selectedResponse) {
+                    localStorage.setItem("temp", "1");
                     // @ts-ignore
                     msg.current.show({severity: 'success', summary: 'Bonne réponse', detail: 'Vous avez bien répondu à la question'})
                 } else {
@@ -67,6 +70,11 @@ export default function () {
                 })}
                 <hr/>
                 <Messages ref={msg}/>
+                <button style={{
+                    marginTop: "1em"
+                }} onClick={() => navigate("/")}>
+                    ↩️ Go Home
+                </button>
             </Card>
         </div>
     )
