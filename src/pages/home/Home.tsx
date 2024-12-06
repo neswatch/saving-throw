@@ -8,34 +8,36 @@ function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className={"home"} style={{ backgroundImage: `url(${OceanBg})` }}>
-      <div style={{ backgroundImage: `url(${WizardImg}` }}>
-        <Step
-          orientation={"UP"}
-          severity={"danger"}
-          id={"heart-button"}
-          onClick={() => navigate("/mj")}
-        >
-          Coeur
-        </Step>
-        <Step
-          orientation={"DOWN"}
-          severity={"info"}
-          id={"lungs-button"}
-          onClick={() => navigate("/poumon")}
-        >
-          Poumons
-        </Step>
-        <Step
-          orientation={"LEFT"}
-          severity={"success"}
-          id={"temperature-button"}
-          onClick={() => navigate("/temperature")}
-        >
-          Température
-        </Step>
+      <div className={"home"} style={{backgroundImage: `url(${OceanBg})`}}>
+        <div style={{backgroundImage: `url(${WizardImg}`}}>
+          <Step
+              orientation={"UP"}
+              severity={"danger"}
+              id={"heart-button"}
+              onClick={() => navigate("/mj")}
+          >
+            Coeur
+          </Step>
+          <Step
+              orientation={"DOWN"}
+              severity={"info"}
+              id={"lungs-button"}
+              onClick={() => navigate("/poumon")}
+          >
+            Poumons
+          </Step>
+          <Step
+              orientation={"LEFT"}
+              severity={"success"}
+              id={"temperature-button"}
+              onClick={() => navigate("/temperature")}
+          >
+            Température
+          </Step>
+        </div>
+        <div id="ecoindex-badge"></div>
+        <script src="https://cdn.jsdelivr.net/gh/cnumr/ecoindex_badge@3/assets/js/ecoindex-badge.js" defer></script>
       </div>
-    </div>
   );
 }
 
