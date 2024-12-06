@@ -29,3 +29,31 @@ div.p-card-content{
     flex-direction: column;
     align-items: center;
 }
+
+div.animIcon{
+    height: 0px;
+}
+
+div.animIcon div{
+    position: relative;
+    top: -63px;
+    left: -25vw;
+}
+
+div.lLogo{
+    position: absolute;
+    animation: logoAnim 1s ease-out;
+    top: 3em;
+    transform: translateY(+100px) scale(3);
+}
+
+@keyframes logoAnim {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(+100px) scale(3);
+        opacity: 1;
+    }
+}

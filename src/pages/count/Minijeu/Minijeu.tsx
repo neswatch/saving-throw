@@ -10,6 +10,8 @@ import i6 from "../../../assets/circuit_marin/i6.png";
 import { Card } from "primereact/card";
 import {useNavigate} from "react-router-dom";
 
+import logo from "../../../assets/logo/logo-lyreco.png";
+
 interface Cell {
   image: string;
   correctValue: number;
@@ -141,86 +143,107 @@ const Grid: React.FC = () => {
     }
   };
 
-  return (
-    <div style={{ backgroundImage: `url(${OceanBg})` }}>
-      <h1>Les courants marins sont complètements détraqués !</h1>
-      <Card>
-        <p>
-          Eh oui, si notre coeur humain assure la circulation du sang en
-          continu, distribuant de façon équitable les ressources de notre corps,
-          il en est de même pour l'océan Les courants marins sont tels nos
-          vaisseaux sanguins. Les ressources de l'océan transitent en permanence
-          grâce eux S'ils disparaissent, c'est alors tout l'océan qui est en
-          danger. La chaine alimentaire d'en voit boulversée A vous de jouer,
-          soyez comme le coeur de l'océan, retablissez l'ordre dans ce véritbale
-          circuit maritime Indice : Il y a deux courants, ✖️ et ⏹️. Ils ne se
-          croisent jamais. Les ressources transportées doivent atteindre toutes
-          les impasses
-        </p>
-      </Card>
-      <div
-        className="grid-container"
-        style={{
-          border: "1px solid black",
-          position: "relative",
-          display: "grid",
-          gridTemplateColumns: `repeat(${referenceGrid[0].length}, 80px)`,
-          gap: "5px",
-          width: "fit-content",
-        }}
-      >
-        <img
-          src={i5}
-          alt="i5"
-          style={{
-            position: "absolute",
-            top: "calc(80px * 2 + 8px * 2)", // Aligné avec la 3ème ligne
-            left: "-45px", // Hors de la grille à gauche
-            height: "80px",
-          }}
-        />
-        <img
-          src={i6}
-          alt="i6"
-          style={{
-            position: "absolute",
-            top: "calc(80px * 2 + 8px * 2)", // Aligné avec la 3ème ligne
-            right: "-48px", // Hors de la grille à droite
-            height: "80px",
-          }}
-        />
+  const [egnim,setEgnim] = useState<string[]>([]);
+  const [displayLogo,setDisplayLogo] = useState(false);
 
-        {grid.map((row, x) =>
-          row.map((cell, y) => (
-            <Case
-              key={`${x}-${y}`}
-              image={cell.image}
-              correctValue={cell.correctValue}
-              currentValue={cell.currentValue}
-              onRotate={() => rotateCase(x, y)}
-            />
-          ))
-        )}
+  function click(l:string){
+      console.log(egnim);
+      setEgnim(v=> {
+          if (v.indexOf(l) == -1){
+                  v.push(l);
+                  if (v.length==6){
+                      setDisplayLogo(true)
+                  }
+          }
+          return v;
+      })
+  }
+
+  return (
+      <div style={{backgroundImage: `url(${OceanBg})`}}>
+          <h1>Les courants marins sont complètements détraqués !</h1>
+          <Card>
+              <p>
+                  Eh oui, si notre coeur humain assure <span className={
+                      "clickable"} onClick={()=>click("l")}>l</span>a circulation du sang en
+                  continu, distribuant de façon équitable les ressources de notre corps,
+                  il en est de même pour l'océan Les <span className={"clickable"} onClick={()=>click("c")}>c</span>ourants marins sont tels nos
+                  vaisseaux sanguins. Les <span className={"clickable"} onClick={()=>click("r")}>r</span>essources de l'océan transitent en
+                  permanence
+                  grâce eux S'ils disparaissent, c'est alors tout l'océan qui est en
+                  danger. La chaine alimentaire d'en voit boulversée A vous de jou<span className={"clickable"} onClick={()=>click("e")}>e</span>r,
+                  so<span className={"clickable"} onClick={()=>click("y")}>y</span>ez comme le coeur de l'océan, retablissez l'ordre dans ce véritbale
+                  circuit maritime Indice : Il y a deux courants, ✖️ et ⏹️. Ils ne se
+                  croisent jamais. Les ressources transp<span className={"clickable"} onClick={()=>click("o")}>o</span>rtées doivent atteindre toutes
+                  les impasses
+              </p>
+          </Card>
+          <div
+              className="grid-container"
+              style={{
+                  border: "1px solid black",
+                  position: "relative",
+                  display: "grid",
+                  gridTemplateColumns: `repeat(${referenceGrid[0].length}, 80px)`,
+                  gap: "5px",
+                  width: "fit-content",
+              }}
+          >
+              <img
+                  src={i5}
+                  alt="i5"
+                  style={{
+                      position: "absolute",
+                      top: "calc(80px * 2 + 8px * 2)", // Aligné avec la 3ème ligne
+                      left: "-45px", // Hors de la grille à gauche
+                      height: "80px",
+                  }}
+              />
+              <img
+                  src={i6}
+                  alt="i6"
+                  style={{
+                      position: "absolute",
+                      top: "calc(80px * 2 + 8px * 2)", // Aligné avec la 3ème ligne
+                      right: "-48px", // Hors de la grille à droite
+                      height: "80px",
+                  }}
+              />
+
+              {grid.map((row, x) =>
+                  row.map((cell, y) => (
+                      <Case
+                          key={`${x}-${y}`}
+                          image={cell.image}
+                          correctValue={cell.correctValue}
+                          currentValue={cell.currentValue}
+                          onRotate={() => rotateCase(x, y)}
+                      />
+                  ))
+              )}
+          </div>
+          <button
+              onClick={checkSolution}
+              style={{
+                  marginTop: "20px",
+                  padding: "10px 20px",
+                  backgroundColor: "#4caf50",
+                  color: "white",
+                  border: "none",
+                  cursor: "pointer",
+              }}
+          >
+              Valider le circuit
+          </button>
+          <button style={{
+              marginTop: "1em"
+          }} onClick={() => navigate("/")}>
+              ↩️ Go Home
+          </button>
+          <div className={"lLogo"} hidden={!displayLogo}>
+              <img height={50} src={logo}/>
+          </div>
       </div>
-      <button
-        onClick={checkSolution}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          backgroundColor: "#4caf50",
-          color: "white",
-          border: "none",
-          cursor: "pointer",
-        }}
-      >
-        Valider le circuit
-      </button>
-        <button style={{
-         marginTop:"1em"
-        }} onClick={()=>navigate("/")}>
-            ↩️ Go Home
-        </button>
-    </div>
   );
 };
 

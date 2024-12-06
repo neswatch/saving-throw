@@ -32,3 +32,27 @@ p {
 h1 {
   text-shadow: #363636 2px 0 10px;
 }
+div.lLogo img{
+  position: absolute;
+  animation: logoAnim2 1s ease-out;
+  top: 0;
+  right: 5em;
+  transform: translateY(+100px) scale(1);
+}
+
+span.clickable{
+  color:red;
+}
+
+@keyframes logoAnim2 {
+  0% {
+    transform: translateY(0) scale(0.2);
+    opacity: 0;
+    rotate: 680deg;
+  }
+  100% {
+    transform: translateY(+100px) scale(1);
+    opacity: 1;
+    rotate: 0;
+  }
+}

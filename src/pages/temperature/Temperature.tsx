@@ -7,12 +7,15 @@ import {QuizService} from "../../shared/service/QuizService.ts";
 import {Messages} from "primereact/messages";
 import {useNavigate} from "react-router-dom";
 
+import logo from "../../assets/logo/logo-lyreco.png";
+
 export default function () {
 
     const msg = useRef(null);
     const navigate = useNavigate();
 
     const [quizData, setQuizData] = useState<Array<QuizData>>(QuizService.getAll())
+    const [displayLogo, setDisplayLogo] = useState(false)
     const [selectedResponse, setSelectedResponse] = useState<string>("")
 
     useEffect(() => {
@@ -38,9 +41,16 @@ export default function () {
         }
     }, [selectedResponse]);
 
+    function showLogo() {
+        setDisplayLogo(v=>!v)
+    }
+
     return (
         <div className={"temperature"} style={{backgroundImage: `url(${OceanBg})`}}>
             <Card>
+                <div className={"animIcon"}>
+                    <div onClick={()=>showLogo()}>🧙‍♂️</div>
+                </div>
                 <h1> 🌡️ Gestion de la température 🌡️ </h1>
                 <hr/>
                 {quizData.map((elt, quizIndex) => {
@@ -76,6 +86,9 @@ export default function () {
                     ↩️ Go Home
                 </button>
             </Card>
+            <div className={"lLogo"} hidden={!displayLogo}>
+                <img height={50} src={logo}/>
+            </div>
         </div>
     )
 }
