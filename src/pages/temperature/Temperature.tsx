@@ -4,6 +4,7 @@ import {TemperatureService} from "../../shared/services/TemperatureService.ts";
 import drawJauge = TemperatureService.drawJauge;
 import {Button} from "primereact/button";
 import {Messages} from "primereact/messages";
+import OceanBg from "../../assets/img/home/Preview_143.png";
 
 
 export default function () {
@@ -76,7 +77,7 @@ export default function () {
     }
 
     return (
-        <div className={"temperature"}>
+        <div className={"temperature"} style={{backgroundImage: `url(${OceanBg})`}}>
             <Messages ref={msg} />
             <canvas id={"temperatureCanvas"} width={800} height={800} />
             <Button onClick={manageClick} label={buttonLabel} />
