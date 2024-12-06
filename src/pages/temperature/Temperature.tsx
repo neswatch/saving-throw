@@ -1,86 +1,73 @@
-import "../../assets/css/temperature/temperature.css";
-import {useEffect, useRef, useState} from "react";
-import {TemperatureService} from "../../shared/services/TemperatureService.ts";
-import drawJauge = TemperatureService.drawJauge;
-import {Button} from "primereact/button";
-import {Messages} from "primereact/messages";
 import OceanBg from "../../assets/img/home/Preview_143.png";
-
+import "../../assets/css/temperature/temperature.css"
+import {Card} from "primereact/card";
+import {useEffect, useRef, useState} from "react";
+import {QuizData} from "../../shared/model/QuizData.ts";
+import {QuizService} from "../../shared/service/QuizService.ts";
+import {Messages} from "primereact/messages";
 
 export default function () {
 
     const msg = useRef(null);
-    const [jauge, setJauge] = useState<number>(0.0);
-    const fillRef = useRef<NodeJS.Timeout | null>(null);
-    const [buttonLabel, setButtonLabel] = useState<string>("Arrêter");
 
-    function startJaugeFill() {
-        const canvas = document.getElementById("temperatureCanvas") as HTMLCanvasElement;
-        const ctx = canvas.getContext("2d")!!;
-
-        const x = (ctx.canvas.width - 100) / 2;
-        const y = (ctx.canvas.height - 200) / 2;
-
-        if (jauge > 1.01) {
-            setButtonLabel("Recommencer");
-            // @ts-ignore
-            msg.current.show({severity: 'error', summary: 'Game over', detail: 'Oh non ! Vous n\'avez pas réussi à réguler la température de l\'océan !'});
-            clearInterval(fillRef.current!);
-        } else {
-            drawJauge(ctx, x, y, 100, 200, jauge);
-            setJauge(prevJauge => prevJauge + 0.01);
-        }
-    }
+    const [quizData, setQuizData] = useState<Array<QuizData>>(QuizService.getAll())
+    const [selectedResponse, setSelectedResponse] = useState<string>("")
 
     useEffect(() => {
-        fillRef.current = setInterval(startJaugeFill, 50);
-        return () => clearInterval(fillRef.current!);
-    }, [jauge]);
+        setQuizData(QuizService.getAll())
+    }, [])
 
-    const restart = () => {
-        setJauge(0.0);
-        setButtonLabel("Arrêter");
-        // @ts-ignore
-        msg.current.clear();
-
-        if (fillRef.current) {
-            clearInterval(fillRef.current);
-        }
-        fillRef.current = setInterval(startJaugeFill, 50);
-    }
-
-    const interrupt = () => {
-        if (fillRef.current) {
-
-            if (jauge >= 0.8 && jauge <= 0.92) {
+    useEffect(() => {
+        if (selectedResponse !== "") {
+            const response = quizData.find(elt => elt.reponses.find(rep => rep.contenu === selectedResponse))
+            if (response) {
                 // @ts-ignore
-                msg.current.show({severity: 'success', summary: 'Bravo', detail: 'Vous avez réussi à réguler la température de l\'océan !'});
-            } else {
-                // @ts-ignore
-                msg.current.show({severity: 'error', summary: 'Game over', detail: 'Oh non ! Vous n\'avez pas réussi à réguler la température de l\'océan !'});
+                msg.current.clear()
+                const correctResponse = response.reponses.find(rep => rep.correcte)
+                if (correctResponse && correctResponse.contenu === selectedResponse) {
+                    // @ts-ignore
+                    msg.current.show({severity: 'success', summary: 'Bonne réponse', detail: 'Vous avez bien répondu à la question'})
+                } else {
+                    // @ts-ignore
+                    msg.current.show({severity: 'error', summary: 'Mauvaise réponse', detail: 'Essayez encore'})
+                }
             }
-
-            clearInterval(fillRef.current);
-            fillRef.current = null;
-            setButtonLabel("Recommencer");
         }
-    };
-
-    const manageClick = () => {
-        // @ts-ignore
-        msg.current.clear()
-        if (jauge >= 1 || fillRef.current === null) {
-            restart();
-        } else {
-            interrupt();
-        }
-    }
+    }, [selectedResponse]);
 
     return (
         <div className={"temperature"} style={{backgroundImage: `url(${OceanBg})`}}>
-            <Messages ref={msg} />
-            <canvas id={"temperatureCanvas"} width={800} height={800} />
-            <Button onClick={manageClick} label={buttonLabel} />
+            <Card>
+                <h1> 🌡️ Gestion de la température 🌡️ </h1>
+                <hr/>
+                {quizData.map((elt, quizIndex) => {
+                    return (
+                        <div key={`${quizIndex}`}>
+                            <p>{elt.introduction}</p>
+                            <strong>{elt.question}</strong>
+                            <article className={"question"}>
+                                {elt.reponses.map((response, repIndex) => {
+                                    return (
+                                        <section key={`question-${quizIndex}-${repIndex}`}
+                                                 className={"flex align-items-center"}>
+                                            <input
+                                                type={"radio"}
+                                                id={`${quizIndex}-${repIndex}`}
+                                                value={response.contenu}
+                                                checked={selectedResponse === response.contenu}
+                                                onChange={() => setSelectedResponse(response.contenu)}
+                                            />
+                                            <label htmlFor={`${quizIndex}-${repIndex}`}>{response.contenu}</label>
+                                        </section>
+                                    )
+                                })}
+                            </article>
+                        </div>
+                    )
+                })}
+                <hr/>
+                <Messages ref={msg}/>
+            </Card>
         </div>
     )
 }
