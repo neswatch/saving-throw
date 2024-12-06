@@ -8,3 +8,13 @@ div.poumon {
     background-repeat: no-repeat;
     z-index: 1;
 }
+.xlarge{
+    font-size: xxx-large;
+}
+.centreCell{
+    border-right: 2px  solid black;
+    border-left: 2px  solid black;
+}
+.table-collapse{
+ border-collapse:collapse;
+}

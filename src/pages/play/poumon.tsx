@@ -78,7 +78,7 @@ export default function Poumon() {
             <td>
                 <Case state={value[0]}></Case>
             </td>
-            <td style={{"border-right": "2px  solid black","border-left": "2px  solid black"}}>
+            <td className={"centreCell"}>
                 <Case state={value[1]} ></Case>
             </td>
             <td>
@@ -114,7 +114,7 @@ export default function Poumon() {
         <div className="poumon" style={{backgroundImage: `url(${OceanBg})`}}>
 
             <div className="card" >
-                <table style={{"border-collapse":"collapse"}}>
+                <table className={"table-collapse"}>
                     {getRaw(grille[7])}
                     {getRaw(grille[6])}
                     {getRaw(grille[5])}
@@ -126,7 +126,7 @@ export default function Poumon() {
                         <td >
                             <Case vaiseau={vaiseauPos == 0} state={grille[0][0]}></Case>
                         </td>
-                        <td style={{"border-right": "2px  solid black","border-left": "2px  solid black"}}>
+                        <td className={"centreCell"} >
                             <Case vaiseau={vaiseauPos == 1} state={grille[0][1]}></Case>
                         </td>
                         <td>
@@ -137,10 +137,10 @@ export default function Poumon() {
                 </table>
 
                 <div style={{"display": "flex"}}>
-                    <button style={{"font-size":"xxx-large"}} onClick={() => makeMove(-1)} disabled={vaiseauPos == 0 || (grille[0][vaiseauPos] > 0)}>◀️
+                    <button className={"xlarge"} onClick={() => makeMove(-1)} disabled={vaiseauPos == 0 || (grille[0][vaiseauPos] > 0)}>◀️
                     </button>
-                    <button style={{"font-size":"xxx-large"}} onClick={() => restart()} disabled={!loos}>🔄️</button>
-                    <button  style={{"font-size":"xxx-large"}} onClick={() => makeMove(1)} disabled={vaiseauPos == 2 || (grille[0][vaiseauPos] > 0)}>▶️
+                    <button className={"xlarge"} onClick={() => restart()} disabled={!loos}>🔄️</button>
+                    <button className={"xlarge"} onClick={() => makeMove(1)} disabled={vaiseauPos == 2 || (grille[0][vaiseauPos] > 0)}>▶️
                     </button>
                 </div>
                 {loos? <p>Perdu !!</p>: <p>Survie le plus longtemps</p>}
