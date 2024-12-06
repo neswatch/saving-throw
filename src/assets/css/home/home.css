@@ -45,19 +45,19 @@ div.home div:first-child #temperature-button {
     rgba(255, 255, 255, 0) 70%
   );
   border-radius: 50%;
-  animation: floatUp 1s ease-out;
+  animation: floatDown 5s ease-in;
   pointer-events: none;
-  opacity: 0.8;
+  opacity: 1;
 }
 
-@keyframes floatUp {
+@keyframes floatDown {
   0% {
     transform: translateY(0) scale(1);
-    opacity: 0.8;
+    opacity: 1;
   }
   100% {
-    transform: translateY(-100px) scale(0.5);
-    opacity: 0;
+    transform: translateY(150px) scale(0.5); /* Particules descendent */
+    opacity: 1;
   }
 }
 
