@@ -10,6 +10,7 @@ interface StepProps {
     children: string
     id?: string
     className?: string
+    onClick?: () => void
 }
 
 export default function (props: StepProps) {
@@ -48,7 +49,7 @@ export default function (props: StepProps) {
     return (
         <article id={props.id} className={`${props.className||""} step`}>
             {ship}
-            <Button label={props.children} severity={props.severity} />
+            <Button label={props.children} severity={props.severity} onClick={props.onClick} />
         </article>
     )
 }

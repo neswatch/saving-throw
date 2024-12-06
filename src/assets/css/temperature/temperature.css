@@ -1,0 +1,7 @@
+div.temperature {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Ensure the div takes the full viewport height */
+    flex-direction: column;
+}
