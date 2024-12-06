@@ -2,6 +2,12 @@ html {
   background: black;
 }
 
+.p-card {
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+}
+
 #root > div {
   display: flex;
   flex-direction: column;
@@ -17,7 +23,6 @@ p {
   margin-bottom: 10px;
   line-height: 1.5rem;
   text-align: justify;
-  width: 80%;
   text-shadow: #363636 2px 0 10px;
 }
 

@@ -7,6 +7,7 @@ import i3 from "../../../assets/circuit_marin/i3.png";
 import i4 from "../../../assets/circuit_marin/i4.png";
 import i5 from "../../../assets/circuit_marin/i5.png";
 import i6 from "../../../assets/circuit_marin/i6.png";
+import { Card } from "primereact/card";
 
 interface Cell {
   image: string;
@@ -138,17 +139,20 @@ const Grid: React.FC = () => {
   return (
     <div style={{ backgroundImage: `url(${OceanBg})` }}>
       <h1>Les courants marins sont complètements détraqués !</h1>
-      <p>
-        Eh oui, si notre coeur humain assure la circulation du sang en continu,
-        distribuant de façon équitable les ressources de notre corps, il en est
-        de même pour l'océan Les courants marins sont tels nos vaisseaux
-        sanguins. Les ressources de l'océan transitent en permanence grâce eux
-        S'ils disparaissent, c'est alors tout l'océan qui est en danger. La
-        chaine alimentaire d'en voit boulversée A vous de jouer, soyez comme le
-        coeur de l'océan, retablissez l'ordre dans ce véritbale circuit maritime
-        Indice : Il y a deux courants, ✖️ et ⏹️. Ils ne se croisent jamais. Les
-        ressources transportées doivent atteindre toutes les impasses
-      </p>
+      <Card>
+        <p>
+          Eh oui, si notre coeur humain assure la circulation du sang en
+          continu, distribuant de façon équitable les ressources de notre corps,
+          il en est de même pour l'océan Les courants marins sont tels nos
+          vaisseaux sanguins. Les ressources de l'océan transitent en permanence
+          grâce eux S'ils disparaissent, c'est alors tout l'océan qui est en
+          danger. La chaine alimentaire d'en voit boulversée A vous de jouer,
+          soyez comme le coeur de l'océan, retablissez l'ordre dans ce véritbale
+          circuit maritime Indice : Il y a deux courants, ✖️ et ⏹️. Ils ne se
+          croisent jamais. Les ressources transportées doivent atteindre toutes
+          les impasses
+        </p>
+      </Card>
       <div
         className="grid-container"
         style={{
