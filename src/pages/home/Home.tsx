@@ -50,8 +50,6 @@ function Home() {
             }
 
         </div>
-        <div id="ecoindex-badge"></div>
-        <script src="https://cdn.jsdelivr.net/gh/cnumr/ecoindex_badge@3/assets/js/ecoindex-badge.js" defer></script>
       </div>
   );
 }
