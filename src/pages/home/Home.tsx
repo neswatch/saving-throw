@@ -1,4 +1,4 @@
-import WizardImg from "../../assets/img/home/iu.png";
+import WizardImg from "../../assets/img/home/iu2.png";
 import "../../assets/css/home/home.css";
 import OceanBg from "../../assets/img/home/Preview_143.png";
 import Step from "./Step.tsx";
