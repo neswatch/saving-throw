@@ -4,10 +4,9 @@ import OceanBg from "../../assets/img/home/Preview_143.png";
 import Step from "./Step.tsx";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo/logo-lyreco.png";
-import  {useState} from "react";
+import { useState } from "react";
 
 function createLightAnimation(buttonId: string) {
-
   const button = document.getElementById(buttonId);
 
   if (!button) {
@@ -71,60 +70,59 @@ function Home() {
   const finishPoumon = localStorage.getItem("poumon");
   const finishTemp = localStorage.getItem("temp");
 
-  const [displayLogo,setDisplayLogo] = useState(false);
-
+  const [displayLogo, setDisplayLogo] = useState(false);
 
   return (
-      <div className={"home"} style={{backgroundImage: `url(${OceanBg})`}}>
-        <div style={{backgroundImage: `url(${WizardImg}`}}>
+    <div className={"home"} style={{ backgroundImage: `url(${OceanBg})` }}>
+      <div style={{ backgroundImage: `url(${WizardImg}` }}>
+        <Step
+          orientation={
+            finishPoumon == "1" && !(finishHearth == "1") ? "UP" : "HIDDEN"
+          }
+          severity={"danger"}
+          id={"heart-button"}
+          onClick={() => navigate("/mj")}
+          disabled={finishPoumon == null}
+        >
+          Coeur
+        </Step>
+        <Step
+          orientation={
+            finishTemp == "1" && finishPoumon == null ? "DOWN" : "HIDDEN"
+          }
+          severity={"info"}
+          id={"lungs-button"}
+          onClick={() => navigate("/poumon")}
+          disabled={finishTemp == null}
+        >
+          Poumons
+        </Step>
+        <Step
+          orientation={finishTemp == null ? "LEFT" : "HIDDEN"}
+          severity={"success"}
+          id={"temperature-button"}
+          onClick={() => navigate("/temperature")}
+        >
+          Température
+        </Step>
+        {finishHearth == "1" ? (
           <Step
-              orientation={
-                finishPoumon == "1" && !(finishHearth == "1") ? "UP" : "HIDDEN"
-              }
-              severity={"danger"}
-              id={"heart-button"}
-              onClick={() => navigate("/mj")}
-              disabled={finishPoumon == null}
+            id="end"
+            orientation={"RIGHT"}
+            severity={"success"}
+            onClick={() => createLightAnimation("end")}
+            onShipClick={() => setDisplayLogo(true)}
           >
-            Coeur
+            Le voyage continue !! (appuyez 2x)
           </Step>
-          <Step
-              orientation={
-                finishTemp == "1" && finishPoumon == null ? "DOWN" : "HIDDEN"
-              }
-              severity={"info"}
-              id={"lungs-button"}
-              onClick={() => navigate("/poumon")}
-              disabled={finishTemp == null}
-          >
-            Poumons
-          </Step>
-          <Step
-              orientation={finishTemp == null ? "LEFT" : "HIDDEN"}
-              severity={"success"}
-              id={"temperature-button"}
-              onClick={() => navigate("/temperature")}
-          >
-            Température
-          </Step>
-          {finishHearth == "1" ? (
-              <Step
-                  id="end"
-                  orientation={"RIGHT"}
-                  severity={"success"}
-                  onClick={() => createLightAnimation("end")}
-                  onShipClick={() => setDisplayLogo(true)}
-              >
-                Le voyage continue !!
-              </Step>
-          ) : (
-              ""
-          )}
-        </div>
-        <div className={"lLogo3"} hidden={!displayLogo}>
-          <img height={50} src={logo}/>
-        </div>
+        ) : (
+          ""
+        )}
       </div>
+      <div className={"lLogo3"} hidden={!displayLogo}>
+        <img height={50} src={logo} />
+      </div>
+    </div>
   );
 }
 
