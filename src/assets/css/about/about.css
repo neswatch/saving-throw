@@ -28,6 +28,15 @@ div.about h1, div.about h2 {
     padding-bottom: 2vh;
 }
 
+div.about img {
+    width: auto;
+    height: 20vh;
+}
+
+div.about li {
+    cursor: pointer;
+}
+
 
 
 
