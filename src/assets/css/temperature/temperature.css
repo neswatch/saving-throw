@@ -24,3 +24,8 @@ div.temperature article.question section {
     gap: 2vw;
     align-items: center;
 }
+div.p-card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

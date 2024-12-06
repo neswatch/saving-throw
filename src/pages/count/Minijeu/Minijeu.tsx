@@ -7,6 +7,7 @@ import i3 from "../../../assets/circuit_marin/i3.png";
 import i4 from "../../../assets/circuit_marin/i4.png";
 import i5 from "../../../assets/circuit_marin/i5.png";
 import i6 from "../../../assets/circuit_marin/i6.png";
+import {useNavigate} from "react-router-dom";
 
 interface Cell {
   image: string;
@@ -69,6 +70,9 @@ const Case: React.FC<CaseProps> = ({
 };
 
 const Grid: React.FC = () => {
+
+    const navigate = useNavigate();
+
   // Tableau de référence avec images et orientations correctes
   const referenceGrid: Cell[][] = [
     [
@@ -130,6 +134,7 @@ const Grid: React.FC = () => {
     );
     if (isSolved) {
       alert("Bravo ! Circuit complet !");
+      localStorage.setItem("heart", "1");
     } else {
       alert("Le circuit n'est pas encore correct.");
     }
@@ -206,6 +211,11 @@ const Grid: React.FC = () => {
       >
         Valider le circuit
       </button>
+        <button style={{
+         marginTop:"1em"
+        }} onClick={()=>navigate("/")}>
+            ↩️ Go Home
+        </button>
     </div>
   );
 };
